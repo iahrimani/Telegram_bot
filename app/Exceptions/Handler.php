@@ -31,7 +31,6 @@ class Handler extends ExceptionHandler
 
     protected $telegram;
 
-
     public function __construct(Container $container, Telegram $telegram)
     {
         parent::__construct($container);
