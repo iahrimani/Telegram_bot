@@ -28,6 +28,15 @@ class Telegram
             ]);
     }
 
+    public function replyMessage($chat_id, $message, $message_id){
+        return  $this->http::post(self::url.$this->bot.'/sendMessage', [
+            'chat_id' => $chat_id,
+            'text' => $message,
+            'parse_mode' => 'html',
+            'reply_to_message_id' => $message_id
+        ]);
+    }
+
     public function editMessage($chat_id, $message, $message_id)
     {
         return $this->http::post(self::url . $this->bot . '/sendMessageText',
