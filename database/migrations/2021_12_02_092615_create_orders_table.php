@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('product');
-            $table->boolean('public');
+            $table->string('public')->nullable();
             $table->string('secret_key');
         });
     }

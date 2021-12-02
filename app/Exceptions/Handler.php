@@ -29,26 +29,26 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-//    protected $telegram;
+    protected $telegram;
 
-//
-//    public function __construct(Container $container, Telegram $telegram)
-//    {
-//        parent::__construct($container);
-//        $this->telegram = $telegram;
-//    }
+
+    public function __construct(Container $container, Telegram $telegram)
+    {
+        parent::__construct($container);
+        $this->telegram = $telegram;
+    }
 
 //    Отправка ошибок в телеграмм
-//    public function report(Throwable $e)
-//    {
-//        $data = [
-//            'description' => $e->getMessage(),
-//            'file' => $e->getFile(),
-//            'line' => $e->getLine(),
-//        ];
-//
-//        $this->telegram->sendMessage(env('TELEGRAM_CHAT_ID'), (string)view('report.telegram', $data));
-//    }
+    public function report(Throwable $e)
+    {
+        $data = [
+            'description' => $e->getMessage(),
+            'file' => $e->getFile(),
+            'line' => $e->getLine(),
+        ];
+
+        $this->telegram->sendMessage(env('TELEGRAM_CHAT_ID'), (string)view('report.telegram', $data));
+    }
 
     /**
      * Register the exception handling callbacks for the application.

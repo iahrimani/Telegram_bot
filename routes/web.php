@@ -1,7 +1,7 @@
 <?php
 
-use App\Helpers\Telegram;
 use Illuminate\Support\Facades\Route;
+use App\Models\Order;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,22 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function (Telegram $telegram) {
-    $buttons = [
-        'inline_keyboard' => [
-            [
-                [
-                    'text' => 'button4',
-                    'callback_data' => '1',
-                ],
-                [
-                    'text' => 'button2',
-                    'callback_data' => '2',
-                ],
-            ]
-        ]
-    ];
-    $sendMessage = $telegram->sendMessage('380288175', 'Это текст нового сообщения');
-    $sendMessage = json_decode($sendMessage);
-    dd($sendMessage);
+Route::get('/', function (\App\Models\Order $order) {
+    return view('site.order', ['orders' => $order->active()->get()]);
+});
+
+Route::group(['namespace' => 'App\Http\Controllers'], function (){
+    Route::post('/order/store', 'OrderController@store')->name('order.store');
+    Route::post('/webhook', 'WebhookController@index');
+    Route::post('/post/store', 'PostController@store')->name('post.store');
 });
